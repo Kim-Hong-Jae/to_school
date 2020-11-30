@@ -1,10 +1,14 @@
 package go_to_school;
 
+import java.util.ArrayList;
+
 import javax.swing.table.*;
 
 public class MyModel extends AbstractTableModel{
+
 	
-	//TODO 서버에서 과목, 시간 받아와서 글 및 바탕색 설정
+	//TODO TABLE_DATA에 들어갈 내용 받아온 ArrayList 이용해서 만들기
+	//Client.weekDaysArray 등 사용하면 됨
 	
 	public Object[][] TABLE_DATA = {
 				{"09","","","","",""},

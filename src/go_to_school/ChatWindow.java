@@ -26,6 +26,7 @@ public class ChatWindow {
     private Frame frame;
     private Panel pannel;
     private Button buttonSend;
+    private Button buttonToTimeTable;
     private TextField textField;
     private TextArea textArea;
 
@@ -36,7 +37,8 @@ public class ChatWindow {
         this.name = name;
         frame = new Frame(name);
         pannel = new Panel();
-        buttonSend = new Button("Send");
+        buttonSend = new Button("전송");
+        buttonToTimeTable = new Button("메인화면");
         textField = new TextField();
         textArea = new TextArea(30, 80);
         this.socket = socket;
@@ -55,7 +57,18 @@ public class ChatWindow {
                 sendMessage();
             }
         });
+        
 
+	    // Button
+	    buttonToTimeTable.setBackground(Color.GRAY);
+	    buttonToTimeTable.setForeground(Color.WHITE);
+	    buttonToTimeTable.addActionListener( new ActionListener() {
+	        @Override
+	        public void actionPerformed( ActionEvent actionEvent ) {
+	            new TimeTable();
+	            frame.dispose();
+	        }
+	    });
 
         // Textfield
         textField.setColumns(80);
@@ -72,6 +85,7 @@ public class ChatWindow {
         pannel.setBackground(Color.LIGHT_GRAY);
         pannel.add(textField);
         pannel.add(buttonSend);
+        pannel.add(buttonToTimeTable);
         frame.add(BorderLayout.SOUTH, pannel);
 
         // TextArea
@@ -95,7 +109,11 @@ public class ChatWindow {
         });
         frame.setVisible(true);
         frame.pack();
+        
+
     }
+    
+
 
     // 쓰레드를 만들어서 대화를 보내기
     private void sendMessage() {

@@ -20,8 +20,8 @@ public class ChatClient {
     private static final int SERVER_PORT = 1111;
     private String name;
     public static int brk = 0;
-    public static void main(String[] args) {
-        new Login();
+    public ChatClient() {
+        
         //TODO ¸ØÃß´Â ±â´É
         String name = Login.name;
         Socket socket = new Socket();

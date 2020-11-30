@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-
 public class TimeTable extends JFrame{
 	 public TimeTable() {
 		 Container contentPane = this.getContentPane();
@@ -36,6 +35,7 @@ public class TimeTable extends JFrame{
              @Override
              public void actionPerformed(ActionEvent e) {
             	 //TODO 대기모드 풀기
+            	new ChatClient();
       		   	dispose();
              }
          });
@@ -63,8 +63,8 @@ public class TimeTable extends JFrame{
              @Override
              public void actionPerformed(ActionEvent e) {
             	 
-            	 //TODO 추가 창으로
-            	 //dispose();
+            	 new AddPreSetted();
+            	 dispose();
              }
          });
 		 
