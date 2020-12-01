@@ -32,7 +32,7 @@ public class ChatClient {
             new ChatWindow(name, socket).show();
 
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
-            String request = "join:" + name + "\r\n";
+            String request = "join&)" + name + "\r\n";
             pw.println(request);
         }
         catch (IOException e) {

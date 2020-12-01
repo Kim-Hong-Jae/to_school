@@ -98,7 +98,7 @@ public class ChatWindow {
                 PrintWriter pw;
                 try {
                     pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
-                    String request = "quit\r\n";
+                    String request = "quit$\r\n";
                     pw.println(request);
                     System.exit(0);
                 }
@@ -121,11 +121,24 @@ public class ChatWindow {
         try {
             pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
             String message = textField.getText();
-            String request = "message:" + message + "\r\n";
+            String request = "message$" + message + "\r\n";
             pw.println(request);
 
             textField.setText("");
             textField.requestFocus();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //준비물 보내주기
+    private void sendReq(String requirements) {
+        PrintWriter pw;
+        try {
+            pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
+            // 준비물 넣는 곳
+            String request = "requirements$" + requirements + "\r\n";
+            pw.println(request);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -143,9 +156,21 @@ public class ChatWindow {
             try {
                 BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
                 while(true) {
-                    String msg = br.readLine();
-                    textArea.append(msg);
-                    textArea.append("\n");
+                	String request = br.readLine();
+                	String[] tokens = request.split("$");
+                	if("massage".equals(tokens[0])) {
+                		textArea.append(tokens[1]);
+                        textArea.append("\n");
+                    }
+                	else if("reqRequest".equals(tokens[0])){
+                		String[] stringArray = Client.requirementsArray.toArray(new String[0]);
+                		sendReq(stringArray.toString());
+                    }
+                	else if("compareResult".equals(tokens[0])){
+                		textArea.append(tokens[1]);
+                        textArea.append("\n");
+                    }
+                    
                 }
             }
             catch (IOException e) {

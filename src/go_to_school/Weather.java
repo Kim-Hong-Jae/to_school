@@ -16,7 +16,7 @@ import java.util.Date;
 public class Weather {
 	int rainProbability;
 	int temperature;
-	static ArrayList<String>  requirements = new ArrayList<>();
+	static ArrayList<String>  requirements;
 	public Weather() throws IOException {
 		
 		
@@ -76,7 +76,7 @@ public class Weather {
         rainProbability = Integer.parseInt(js[indexPOP]);
         int indexT3H = Arrays.asList(js).indexOf("T3H") + 12;
         temperature = Integer.parseInt(js[indexT3H]);
-        
+        requirements = new ArrayList<>();
         
         if (rainProbability>50) {
         	requirements.add(String.format("¿ì»ê %s %", rainProbability));

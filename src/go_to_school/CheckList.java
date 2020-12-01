@@ -63,17 +63,37 @@ public class CheckList {
             add(addText, BorderLayout.NORTH);
             
             //TODO 서버에서 가져와서 미리 정해진 준비물 셋팅
-            String preSetted = "미리 정해진 준비물";
-            JPanel panel = new JPanel();
-            panel.add(new JCheckBox(preSetted));
-            panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-            GridBagConstraints hbc = new GridBagConstraints();
-            hbc.gridwidth = GridBagConstraints.REMAINDER;
-            hbc.weightx = 1;
-            hbc.fill = GridBagConstraints.HORIZONTAL;
-            mainList.add(panel, hbc, 0);
-            validate();
-            repaint();
+            try {
+				Weather bringWeather = new Weather();
+				Client.requirementsArray.addAll(bringWeather.getRequirements());
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            
+            Client.requirementsArray.add("laptop");
+            Client.requirementsArray.add("Pencil");
+            System.out.println(Client.requirementsArray);
+            
+            int totalReq = Client.requirementsArray.size();
+            
+            String preSetted;
+            
+            for(int i=0; i<totalReq; i++) {
+            	preSetted = Client.requirementsArray.get(i);
+            	System.out.println(preSetted);
+            	JPanel panel = new JPanel();
+                panel.add(new JCheckBox(preSetted));
+                panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+                GridBagConstraints hbc = new GridBagConstraints();
+                hbc.gridwidth = GridBagConstraints.REMAINDER;
+                hbc.weightx = 1;
+                hbc.fill = GridBagConstraints.HORIZONTAL;
+                
+                mainList.add(panel, hbc, 0);
+                validate();
+                repaint();
+            }
             
             JPanel buttons = new JPanel();
             
@@ -83,18 +103,24 @@ public class CheckList {
             add.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                	
                 	String addRequirements = addText.getText();
-                	JPanel panel1 = new JPanel();
-                	panel1.add(new JCheckBox(addRequirements));
-                    panel1.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
-                    GridBagConstraints hbc = new GridBagConstraints();
-                    hbc.gridwidth = GridBagConstraints.REMAINDER;
-                    hbc.weightx = 1;
-                    hbc.fill = GridBagConstraints.HORIZONTAL;
-                    mainList.add(panel1, hbc, 0);
-                    validate();
-                    repaint();
-                    addText.setText("");
+                	if (addRequirements.isEmpty() == true) {
+                		JOptionPane.showMessageDialog(null, "\"준비물은 한글자 이상 입력해야 합니다.");
+                	}
+                	else {
+                		JPanel panel1 = new JPanel();
+                    	panel1.add(new JCheckBox(addRequirements));
+                        panel1.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));
+                        GridBagConstraints hbc = new GridBagConstraints();
+                        hbc.gridwidth = GridBagConstraints.REMAINDER;
+                        hbc.weightx = 1;
+                        hbc.fill = GridBagConstraints.HORIZONTAL;
+                        mainList.add(panel1, hbc, 0);
+                        validate();
+                        repaint();
+                        addText.setText("");
+                	}
                 }
             });
            

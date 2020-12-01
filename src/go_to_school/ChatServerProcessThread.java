@@ -35,12 +35,20 @@ public class ChatServerProcessThread extends Thread{
                     break;
                 }
 
-                String[] tokens = request.split(":");
+                String[] tokens = request.split("$");
                 if("join".equals(tokens[0])) {
                     doJoin(tokens[1], printWriter);
                 }
                 else if("message".equals(tokens[0])) {
                     doMessage(tokens[1]);
+                }
+                else if("compRequest".equals(tokens[0])) {
+                	doRequest();
+                }
+                else if("requirements".equals(tokens[0])) {
+                	//받은 tokens[1]로 비교하기
+                	String compareResult = "";
+                	doCompare(compareResult);
                 }
                 else if("quit".equals(tokens[0])) {
                     doQuit(printWriter);
@@ -66,7 +74,15 @@ public class ChatServerProcessThread extends Thread{
     }
 
     private void doMessage(String data) {
-        broadcast(this.nickname + ":" + data);
+        broadcast("massage$" + this.nickname + ":" + data);
+    }
+    
+    private void doRequest() {
+    	broadcast( "reqRequest$" );
+    }
+    
+    private void doCompare(String compareResult) {
+    	broadcast( "compareResult$" + this.nickname + ":" + compareResult);
     }
 
     private void doJoin(String nickname, PrintWriter writer) {
