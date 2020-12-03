@@ -34,21 +34,24 @@ public class ChatServerProcessThread extends Thread{
                     doQuit(printWriter);
                     break;
                 }
-
-                String[] tokens = request.split("$");
+                
+                String[] tokens = request.split("@@");
+                System.out.println(tokens[0]);
                 if("join".equals(tokens[0])) {
+                	System.out.println(tokens[1]);
                     doJoin(tokens[1], printWriter);
                 }
                 else if("message".equals(tokens[0])) {
                     doMessage(tokens[1]);
                 }
-                else if("compRequest".equals(tokens[0])) {
+                else if("shareRequest".equals(tokens[0])) {
+                	System.out.println("1");
                 	doRequest();
                 }
                 else if("requirements".equals(tokens[0])) {
-                	//받은 tokens[1]로 비교하기
-                	String compareResult = "";
-                	doCompare(compareResult);
+                	String shareResult = tokens[1];
+                	System.out.println(shareResult.toString());
+                	doShare(shareResult);
                 }
                 else if("quit".equals(tokens[0])) {
                     doQuit(printWriter);
@@ -74,21 +77,21 @@ public class ChatServerProcessThread extends Thread{
     }
 
     private void doMessage(String data) {
-        broadcast("massage$" + this.nickname + ":" + data);
+        broadcast("message@@" + this.nickname + ":" + data);
     }
     
     private void doRequest() {
-    	broadcast( "reqRequest$" );
+    	broadcast( "reqRequest@@");
     }
     
-    private void doCompare(String compareResult) {
-    	broadcast( "compareResult$" + this.nickname + ":" + compareResult);
+    private void doShare(String shareResult) {
+    	broadcast("shareResult@@" + this.nickname + "님의 준비물 공유:" + shareResult);
     }
 
     private void doJoin(String nickname, PrintWriter writer) {
         this.nickname = nickname;
 
-        String data = nickname + "님이 입장하였습니다.";
+        String data = "joinComplete@@" + nickname + "님이 입장하였습니다.";
         broadcast(data);
 
         // writer pool에 저장

@@ -1,32 +1,33 @@
 package go_to_school;
 
+import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.util.ArrayList;
 
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.*;
 
 public class MyModel extends AbstractTableModel{
 
-	
-	//TODO TABLE_DATA에 들어갈 내용 받아온 ArrayList 이용해서 만들기
-	//Client.weekDaysArray 등 사용하면 됨
-	
-	public Object[][] TABLE_DATA = {
-				{"09","","","","",""},
-				{"10","","","","",""},
-				{"11","","","","",""},
-				{"12","","","","",""},
-				{"13","","","","",""},
-				{"14","","","","",""},
-				{"15","","","","",""},
-				{"16","","","","",""},
-				{"17","","","","",""},
-				{"18","","","","",""},
-				{"19","","","","",""},
-				{"20","","","","",""},
-				{"21","","","","",""},
-				{"22","","","","",""}
-		    };
-	
+	public static String[] columnNames = {"","월요일","화요일","수요일","목요일","금요일"};
+	public static Object[][] TABLE_DATA = {
+			{"09","","","","",""},
+			{"10","","","","",""},
+			{"11","","","","",""},
+			{"12","","","","",""},
+			{"13","","","","",""},
+			{"14","","","","",""},
+			{"15","","","","",""},
+			{"16","","","","",""},
+			{"17","","","","",""},
+			{"18","","","","",""},
+			{"19","","","","",""},
+			{"20","","","","",""},
+			{"21","","","","",""},
+			{"22","","","","",""}
+	    };
 
 	
 	public int getColumnCount() {

@@ -16,13 +16,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class ChatClient {
+    
     private static final String SERVER_IP = "192.168.219.107";
     private static final int SERVER_PORT = 1111;
-    private String name;
     public static int brk = 0;
     public ChatClient() {
         
-        //TODO ¸ØÃß´Â ±â´É
+
         String name = Login.name;
         Socket socket = new Socket();
         try {
@@ -30,9 +30,8 @@ public class ChatClient {
             consoleLog("Entered the group chat.");
             System.out.println(name);
             new ChatWindow(name, socket).show();
-
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), StandardCharsets.UTF_8), true);
-            String request = "join&)" + name + "\r\n";
+            String request = "join@@" + name + "\r\n";
             pw.println(request);
         }
         catch (IOException e) {
@@ -56,9 +55,6 @@ public class ChatClient {
      	JTextField nameText = new JTextField();
      	name=nameText.getText();
      	System.out.println(name);
- 		
-     	
- 		
  		inputLabel.add(nameText);
  		
  		newWindow.getContentPane().add(inputLabel);

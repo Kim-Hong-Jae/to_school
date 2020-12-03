@@ -4,6 +4,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class CheckList {
@@ -41,7 +42,8 @@ public class CheckList {
             }
         });
     }
-
+    
+    
     public class TestPane extends JPanel {
 
         private JPanel mainList;
@@ -62,18 +64,6 @@ public class CheckList {
             JTextField addText = new JTextField();
             add(addText, BorderLayout.NORTH);
             
-            //TODO 서버에서 가져와서 미리 정해진 준비물 셋팅
-            try {
-				Weather bringWeather = new Weather();
-				Client.requirementsArray.addAll(bringWeather.getRequirements());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-            
-            Client.requirementsArray.add("laptop");
-            Client.requirementsArray.add("Pencil");
-            System.out.println(Client.requirementsArray);
             
             int totalReq = Client.requirementsArray.size();
             
@@ -109,6 +99,7 @@ public class CheckList {
                 		JOptionPane.showMessageDialog(null, "\"준비물은 한글자 이상 입력해야 합니다.");
                 	}
                 	else {
+                		Client.requirementsArray.add(addRequirements);
                 		JPanel panel1 = new JPanel();
                     	panel1.add(new JCheckBox(addRequirements));
                         panel1.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));

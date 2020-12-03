@@ -13,7 +13,7 @@ public class TimeTable extends JFrame{
 		 
 		 MyModel mm = new MyModel();
 		 
-		 JTable table = new JTable(mm);
+		 JTable table = new JTable(mm.TABLE_DATA, mm.columnNames);
 		 table.getTableHeader().setReorderingAllowed(false);
 		 table.getTableHeader().setResizingAllowed(false);
 		 table.setFocusable(false);
@@ -45,14 +45,6 @@ public class TimeTable extends JFrame{
              @Override
              public void actionPerformed(ActionEvent e) {
              	//체크리스트로
-            	 try {
-					new Weather();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            	 System.out.println(Weather.getRequirements().toString());
-
             	 new CheckList();
             	 dispose();
              }

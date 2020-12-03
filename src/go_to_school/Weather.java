@@ -16,7 +16,6 @@ import java.util.Date;
 public class Weather {
 	int rainProbability;
 	int temperature;
-	static ArrayList<String>  requirements;
 	public Weather() throws IOException {
 		
 		
@@ -76,28 +75,22 @@ public class Weather {
         rainProbability = Integer.parseInt(js[indexPOP]);
         int indexT3H = Arrays.asList(js).indexOf("T3H") + 12;
         temperature = Integer.parseInt(js[indexT3H]);
-        requirements = new ArrayList<>();
-        
-        if (rainProbability>50) {
-        	requirements.add(String.format("¿ì»ê %s %", rainProbability));
+        if (rainProbability>30) {
+        	Client.requirementsArray.add(String.format("¿ì»ê %sºñ¿ÃÈ®·ü%", rainProbability));
         }
         if (temperature>25) {
-        	requirements.add(String.format("¹ÝÆÈ %s C", temperature));
+        	Client.requirementsArray.add(String.format("¹ÝÆÈ ¼·¾¾ %sµµ", temperature));
         }
         else if(temperature>15) {
-        	requirements.add(String.format("±äÆÈ %s C", temperature));
+        	Client.requirementsArray.add(String.format("±äÆÈ ¼·¾¾ %sµµ", temperature));
         }
         else if(temperature>5) {
-        	requirements.add(String.format("ÄÚÆ® %s C", temperature));
+        	Client.requirementsArray.add(String.format("ÄÚÆ® ¼·¾¾ %sµµ", temperature));
         }
         else {
-        	requirements.add(String.format("ÆÐµù %s C", temperature));
+        	Client.requirementsArray.add(String.format("ÆÐµù ¼·¾¾ %sµµ", temperature));
         }
     }
-	public static ArrayList<String> getRequirements(){
-		//TODO ¼­¹ö·Î ³¯¾¾·Î ÀÎÇØ ÇÊ¿ä ¹°Ç° Àü¼Û
-		return requirements;
-	}
 
 }
 
